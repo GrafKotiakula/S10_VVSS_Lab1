@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.UUID;
 
 public interface ListItemRepository extends JpaRepository<ListItem, UUID> {
-    @Query("SELECT MAX(li.priorityChangeNumber) FROM ListItem.li WHERE li.owner = :owner")
+    @Query("SELECT MAX(li.priorityChangeNumber) FROM ListItem li WHERE li.owner = :owner")
     Integer findMaxPriorityChangeNumberForOwner(@Param("owner") User owner);
 }

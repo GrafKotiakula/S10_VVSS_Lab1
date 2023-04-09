@@ -11,7 +11,7 @@ public class UserService extends AbstractService<User, UserRepository> implement
 
     @Autowired
     public UserService(UserRepository repo) {
-        super(repo);
+        super(repo, User.class);
     }
 
     public User loadUserByUsername(String username) throws UsernameNotFoundException {

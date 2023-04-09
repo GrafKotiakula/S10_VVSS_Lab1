@@ -10,7 +10,7 @@ public class ListItemService extends AbstractService<ListItem, ListItemRepositor
 
     @Autowired
     public ListItemService(ListItemRepository repo) {
-        super(repo);
+        super(repo, ListItem.class);
         defaultSort = Sort.by(Sort.Order.asc("owner"),
                 Sort.Order.asc("priority"),
                 Sort.Order.desc("priorityChangeNumber"));
