@@ -1,6 +1,6 @@
 package S10.VVSS.lab1.database;
 
-import S10.VVSS.lab1.exception.NotFoundError;
+import S10.VVSS.lab1.exception.NotFoundException;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -27,8 +27,8 @@ public class AbstractService<E extends AbstractEntity, R extends JpaRepository<E
         return repo.findById(id);
     }
 
-    public E findByIdOrThrow(UUID id) throws NotFoundError {
-        return findById(id).orElseThrow(() -> NotFoundError.entityNotFound(id, entityClazz));
+    public E findByIdOrThrow(UUID id) throws NotFoundException {
+        return findById(id).orElseThrow(() -> NotFoundException.entityNotFound(id, entityClazz));
     }
 
     public E save(E entity) {

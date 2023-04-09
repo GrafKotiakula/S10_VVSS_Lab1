@@ -1,26 +1,26 @@
 package S10.VVSS.lab1.exception;
 
-public class ClientError extends RuntimeException{
+public class ClientException extends RuntimeException{
     private String clientMessage;
     private int code;
 
-    public ClientError(String message, int code) {
+    public ClientException(String message, int code) {
         this(message, message, code);
     }
 
-    public ClientError(String message, String clientMessage, int code) {
+    public ClientException(String message, String clientMessage, int code) {
         super(message);
         this.clientMessage = clientMessage;
         this.code = code;
     }
 
-    public ClientError(String message, String clientMessage, int code, Throwable cause) {
+    public ClientException(String message, String clientMessage, int code, Throwable cause) {
         super(message, cause);
         this.clientMessage = clientMessage;
         this.code = code;
     }
 
-    public ClientError(String message, int code, Throwable cause) {
+    public ClientException(String message, int code, Throwable cause) {
         this(message, message, code, cause);
     }
 
