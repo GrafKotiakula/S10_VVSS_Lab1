@@ -1,0 +1,14 @@
+
+.content {
+    margin: 0 auto;
+    max-width: 700px;
+}
+
+.content p {
+    margin: 20px 0;
+}
+
+.content ul {
+    margin: 20px 50px;
+}
+

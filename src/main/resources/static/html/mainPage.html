@@ -3,9 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>S10_VVSS_TDL</title>
+
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/list.css">
 </head>
 <body>
-    MAIN PAGE
-    <!-- TODO: create main page -->
+    <main>
+        <header>
+            <div class="header-inner">
+                <div class="page-name">To do list</div>
+                <div id="header-username">
+                    User
+                </div>
+                <input id="header-btn" class="btn-secondary" type="button" value="Log in"/>
+            </div>
+        </header>
+        <div class="content">
+            <div id="not-auth-message">
+                <span class="warning">WARNING</span>
+                <span>You have to log in to use a website</span>
+            </div>
+            <!-- TODO: add list -->
+        </div>
+    </main>
+    <footer>
+        <div class="footer-text">
+            -- S10&nbsp;VVSS&nbsp;Lab1 - TO&nbsp;DO&nbsp;LIST --
+        </div>
+        <a class="btn-secondary" href="/about">
+            About project
+        </a>
+    </footer>
 </body>
 </html>
