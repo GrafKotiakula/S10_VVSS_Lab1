@@ -2,6 +2,8 @@ package S10.VVSS.lab1.database.user;
 
 import S10.VVSS.lab1.database.AbstractEntity;
 import S10.VVSS.lab1.database.listitem.ListItem;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -24,6 +26,7 @@ public class User extends AbstractEntity implements UserDetails {
     private List<ListItem> list;
 
     @Override
+    @JsonProperty
     public String getUsername() {
         return username;
     }
@@ -33,6 +36,7 @@ public class User extends AbstractEntity implements UserDetails {
     }
 
     @Override
+    @JsonProperty
     public String getPassword() {
         return password;
     }
@@ -41,6 +45,7 @@ public class User extends AbstractEntity implements UserDetails {
         this.password = password;
     }
 
+    @JsonProperty
     public List<ListItem> getList() {
         return list;
     }
@@ -50,26 +55,31 @@ public class User extends AbstractEntity implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.emptySet();
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }

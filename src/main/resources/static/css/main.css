@@ -10,6 +10,7 @@
     --color-primary-front: #B46060;
     --color-secondary-back: #FFBF9B;
     --color-secondary-front: #4D4D4D;
+    --color-warning: Tomato;
 }
 
 body {
@@ -17,14 +18,19 @@ body {
     color: var(--color-primary-front);
 }
 
-input[type=button] {
+input {
     font-size: inherit;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    outline: none;
 }
 
 .btn-primary {
     padding: 5px 10px;
     background-color: var(--color-primary-front);
     color: var(--color-primary-back);
+    border: none;
     border-radius: 5px;
     text-decoration: none;
 }

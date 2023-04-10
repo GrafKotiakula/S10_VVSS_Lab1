@@ -2,6 +2,8 @@ package S10.VVSS.lab1.database.listitem;
 
 import S10.VVSS.lab1.database.AbstractEntity;
 import S10.VVSS.lab1.database.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
@@ -24,6 +26,7 @@ public class ListItem extends AbstractEntity {
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
+    @JsonProperty
     public String getMessage() {
         return message;
     }
@@ -32,6 +35,7 @@ public class ListItem extends AbstractEntity {
         this.message = message;
     }
 
+    @JsonProperty("isDone")
     public Boolean getDone() {
         return isDone;
     }
@@ -40,6 +44,7 @@ public class ListItem extends AbstractEntity {
         isDone = done;
     }
 
+    @JsonIgnore
     public Integer getPriority() {
         return priority;
     }
@@ -48,6 +53,7 @@ public class ListItem extends AbstractEntity {
         this.priority = priority;
     }
 
+    @JsonIgnore
     public Integer getPriorityChangeNumber() {
         return priorityChangeNumber;
     }
@@ -56,6 +62,7 @@ public class ListItem extends AbstractEntity {
         this.priorityChangeNumber = priorityChangeNumber;
     }
 
+    @JsonIgnore
     public User getOwner() {
         return owner;
     }

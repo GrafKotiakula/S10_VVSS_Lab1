@@ -37,7 +37,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and().authorizeRequests()
                 .antMatchers("/static/html/**").denyAll()
-                .antMatchers("/", "/about", "/api/auth/**").permitAll()
+                .antMatchers("/", "/about", "/static/**", "/api/auth/**").permitAll()
                 .anyRequest().authenticated()
             .and().addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
