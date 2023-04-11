@@ -1,4 +1,4 @@
-package S10.VVSS.lab1.database.user;
+package S10.VVSS.lab1.entities.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

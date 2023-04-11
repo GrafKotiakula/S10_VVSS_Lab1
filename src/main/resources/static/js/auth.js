@@ -75,7 +75,7 @@ function authPopupLogin(authPopup) {
     .then(json => {
         sessionStorage.setItem(jwtTokenStorageName, json.token)
         authPopup.hide()
-        tryLogin()
+        loginUser(json.user)
     })
     .catch(response => {
         if(response.status == 401) {
@@ -158,18 +158,19 @@ function authenticatedRequest(url, params) {
 
 function tryLogin() {
     authenticatedRequest('/api/user', {})
-        .then(response => {
-            if(isSuccessful(response)) {
-                response.json().then(user => {
-                    headerUsername.innerText = user.username
-                    notAuthMessage.style.display = 'none'
-                    list.style.display = 'flex'
-                    loadList(user.list)
-                })
-            }
-        })
+    .then(response => {
+        if(isSuccessful(response)) {
+            response.json().then(user => loginUser(user))
+        }
+    })
 }
 
+function loginUser(user) {
+    headerUsername.innerText = user.username
+    notAuthMessage.style.display = 'none'
+    list.style.display = 'flex'
+    loadList(user.list)
+}
 function logout() {
     sessionStorage.removeItem(jwtTokenStorageName)
     notAuthMessage.style.display = 'flex'

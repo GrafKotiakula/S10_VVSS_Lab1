@@ -1,8 +1,9 @@
-package S10.VVSS.lab1.database.user;
+package S10.VVSS.lab1.entities.user;
 
-import S10.VVSS.lab1.database.AbstractEntity;
-import S10.VVSS.lab1.database.listitem.ListItem;
+import S10.VVSS.lab1.entities.AbstractEntity;
+import S10.VVSS.lab1.entities.listitem.ListItem;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User extends AbstractEntity implements UserDetails {
     @Column(name = "username", length = 50, nullable = false)
     private String username;
@@ -31,6 +33,7 @@ public class User extends AbstractEntity implements UserDetails {
         return username;
     }
 
+    @JsonProperty
     public void setUsername(String username) {
         this.username = username;
     }
@@ -41,6 +44,7 @@ public class User extends AbstractEntity implements UserDetails {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }
@@ -50,6 +54,7 @@ public class User extends AbstractEntity implements UserDetails {
         return list;
     }
 
+    @JsonIgnore
     public void setList(List<ListItem> list) {
         this.list = list;
     }

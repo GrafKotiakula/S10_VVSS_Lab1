@@ -1,7 +1,7 @@
 package S10.VVSS.lab1.config.jwt;
 
-import S10.VVSS.lab1.database.user.User;
-import S10.VVSS.lab1.database.user.UserService;
+import S10.VVSS.lab1.entities.user.User;
+import S10.VVSS.lab1.entities.user.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;

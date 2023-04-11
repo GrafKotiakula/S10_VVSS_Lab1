@@ -1,4 +1,4 @@
-package S10.VVSS.lab1.database;
+package S10.VVSS.lab1.entities;
 
 import S10.VVSS.lab1.exception.NotFoundException;
 import org.springframework.data.domain.Sort;
@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class AbstractService<E extends AbstractEntity, R extends JpaRepository<E, UUID>> {
+public abstract class AbstractService<E extends AbstractEntity, R extends JpaRepository<E, UUID>>
+        extends AbstractValidator<E> {
     protected final R repo;
-    protected final Class<E> entityClazz;
     protected Sort defaultSort;
 
-    public AbstractService(R repo, Class<E> entityClazz) {
+    public AbstractService(R repo, Class<E> entityClass) {
+        super(entityClass);
         this.repo = repo;
-        this.entityClazz = entityClazz;
         defaultSort = Sort.unsorted();
     }
 
@@ -28,7 +28,7 @@ public class AbstractService<E extends AbstractEntity, R extends JpaRepository<E
     }
 
     public E findByIdOrThrow(UUID id) throws NotFoundException {
-        return findById(id).orElseThrow(() -> NotFoundException.entityNotFound(id, entityClazz));
+        return findById(id).orElseThrow(() -> NotFoundException.entityNotFound(id, entityClass));
     }
 
     public E save(E entity) {

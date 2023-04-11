@@ -1,14 +1,16 @@
-package S10.VVSS.lab1.database.listitem;
+package S10.VVSS.lab1.entities.listitem;
 
-import S10.VVSS.lab1.database.AbstractEntity;
-import S10.VVSS.lab1.database.user.User;
+import S10.VVSS.lab1.entities.AbstractEntity;
+import S10.VVSS.lab1.entities.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "list_items")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ListItem extends AbstractEntity {
     @Column(name = "message", length = 100, nullable = false)
     private String message;
@@ -17,10 +19,10 @@ public class ListItem extends AbstractEntity {
     private Boolean isDone;
 
     @Column(name = "priority", nullable = false)
-    private Integer priority;
+    private Integer priority = 0;
 
     @Column(name = "priority_change_number")
-    private Integer priorityChangeNumber;
+    private Integer priorityChangeNumber = 0;
 
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
@@ -31,6 +33,7 @@ public class ListItem extends AbstractEntity {
         return message;
     }
 
+    @JsonProperty
     public void setMessage(String message) {
         this.message = message;
     }
@@ -40,6 +43,7 @@ public class ListItem extends AbstractEntity {
         return isDone;
     }
 
+    @JsonProperty("isDone")
     public void setDone(Boolean done) {
         isDone = done;
     }
@@ -49,6 +53,7 @@ public class ListItem extends AbstractEntity {
         return priority;
     }
 
+    @JsonIgnore
     public void setPriority(Integer priority) {
         this.priority = priority;
     }
@@ -58,6 +63,7 @@ public class ListItem extends AbstractEntity {
         return priorityChangeNumber;
     }
 
+    @JsonIgnore
     public void setPriorityChangeNumber(Integer priorityChangeNumber) {
         this.priorityChangeNumber = priorityChangeNumber;
     }
@@ -67,6 +73,7 @@ public class ListItem extends AbstractEntity {
         return owner;
     }
 
+    @JsonIgnore
     public void setOwner(User owner) {
         this.owner = owner;
     }

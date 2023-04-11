@@ -1,4 +1,7 @@
-package S10.VVSS.lab1.database;
+package S10.VVSS.lab1.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -11,10 +14,12 @@ public class AbstractEntity {
     @Column(name = "id", nullable = false, columnDefinition = "uuid")
     protected UUID id;
 
+    @JsonProperty
     public UUID getId() {
         return id;
     }
 
+    @JsonIgnore
     public void setId(UUID id) {
         this.id = id;
     }

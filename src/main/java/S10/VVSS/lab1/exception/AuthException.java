@@ -7,12 +7,12 @@ public class AuthException extends ClientException {
         super(message, codeOffset + code);
     }
 
-    public AuthException(String message, String clientMessage, int code) {
-        super(message, clientMessage, codeOffset + code);
+    public AuthException(String clientMessage, String message, int code) {
+        super(clientMessage, message, codeOffset + code);
     }
 
-    public AuthException(String message, String clientMessage, int code, Throwable cause) {
-        super(message, clientMessage, codeOffset + code, cause);
+    public AuthException(String clientMessage, String message, int code, Throwable cause) {
+        super(clientMessage, message, codeOffset + code, cause);
     }
 
     public AuthException(String message, int code, Throwable cause) {

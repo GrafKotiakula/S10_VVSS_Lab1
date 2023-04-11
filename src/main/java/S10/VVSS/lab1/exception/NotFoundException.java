@@ -1,6 +1,6 @@
 package S10.VVSS.lab1.exception;
 
-import S10.VVSS.lab1.database.AbstractEntity;
+import S10.VVSS.lab1.entities.AbstractEntity;
 
 import java.util.UUID;
 
@@ -11,12 +11,12 @@ public class NotFoundException extends ClientException {
         super(message, codeOffset + code);
     }
 
-    protected NotFoundException(String message, String clientMessage, int code) {
-        super(message, clientMessage, codeOffset + code);
+    protected NotFoundException(String clientMessage, String message, int code) {
+        super(clientMessage, message, codeOffset + code);
     }
 
-    protected NotFoundException(String message, String clientMessage, int code, Throwable cause) {
-        super(message, clientMessage, codeOffset + code, cause);
+    protected NotFoundException(String clientMessage, String message, int code, Throwable cause) {
+        super(clientMessage, message, codeOffset + code, cause);
     }
 
     protected NotFoundException(String message, int code, Throwable cause) {

@@ -1,6 +1,6 @@
 package S10.VVSS.lab1.dto;
 
-public class LogInRequestDto {
+public class AuthRequestDto {
     private String username;
     private String password;
 
