@@ -1,5 +1,8 @@
 package S10.VVSS.lab1.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthRequestDto {
     private String username;
     private String password;

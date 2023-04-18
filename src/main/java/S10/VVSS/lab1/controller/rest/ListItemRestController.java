@@ -9,9 +9,12 @@ import S10.VVSS.lab1.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
@@ -64,10 +67,12 @@ public class ListItemRestController {
     }
 
     @PostMapping
-    public ListItem create(@AuthenticationPrincipal User user, @RequestBody ListItem item) {
+    public ResponseEntity<ListItem> create(@AuthenticationPrincipal User user, @RequestBody ListItem item) {
         item.setOwner(user);
         listItemService.validate(item);
-        return listItemService.save(item);
+        ListItem listItem = listItemService.save(item);
+
+        return ResponseEntity.created(URI.create("/api/list-item/" + listItem.getId())).body(listItem);
     }
 
     @PutMapping("/{id}")
@@ -92,6 +97,7 @@ public class ListItemRestController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@AuthenticationPrincipal User user, @PathVariable("id") String strId) {
         UUID id = castToUUID(strId);
         ListItem listItem = findListItemByUserAndId(id, user);

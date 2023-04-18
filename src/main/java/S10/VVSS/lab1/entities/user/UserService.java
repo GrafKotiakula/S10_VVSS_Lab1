@@ -41,7 +41,7 @@ public class UserService extends AbstractService<User, UserRepository> implement
 
         validateNotNull("password", user.getPassword());
         validateStringLength("password", user.getPassword(), 5, 30);
-        validateStringMatches(user.getPassword(), "(?=[a-z])(?=[A-Z])(?=[0-9])",
+        validateStringMatches(user.getPassword(), "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*",
                 UnprocessableEntityException.passwordNoRequiredSymbols());
     }
 

@@ -57,3 +57,43 @@ INSERT INTO tdlschema.list_items SET
     is_done = false,
     priority = 5,
     priority_change_number = 5;
+
+INSERT INTO tdlschema.list_items SET
+    id = UUID'00000000-0000-0000-0001-000000000011',
+    owner_id = UUID'00000000-0000-0000-0000-000000000002',
+    message = 'TASK A',
+    is_done = true,
+    priority = 1,
+    priority_change_number = 1;
+
+INSERT INTO tdlschema.list_items SET
+    id = UUID'00000000-0000-0000-0001-000000000012',
+    owner_id = UUID'00000000-0000-0000-0000-000000000002',
+    message = 'TASK B',
+    is_done = false,
+    priority = 2,
+    priority_change_number = 2;
+
+INSERT INTO tdlschema.list_items SET
+    id = UUID'00000000-0000-0000-0001-000000000013',
+    owner_id = UUID'00000000-0000-0000-0000-000000000002',
+    message = 'TASK C',
+    is_done = true,
+    priority = 3,
+    priority_change_number = 3;
+
+INSERT INTO tdlschema.list_items SET
+    id = UUID'00000000-0000-0000-0001-000000000014',
+    owner_id = UUID'00000000-0000-0000-0000-000000000002',
+    message = 'TASK D',
+    is_done = false,
+    priority = 4,
+    priority_change_number = 4;
+
+INSERT INTO tdlschema.list_items SET
+    id = UUID'00000000-0000-0000-0001-000000000015',
+    owner_id = UUID'00000000-0000-0000-0000-000000000002',
+    message = 'TASK E',
+    is_done = false,
+    priority = 5,
+    priority_change_number = 5;

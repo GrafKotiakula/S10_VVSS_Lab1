@@ -72,54 +72,41 @@ function getAuthPopup() {
 
 function authPopupLogin(authPopup) {
     basicLogin(authPopup.username.input.value, authPopup.password.input.value)
-    .then(json => {
-        sessionStorage.setItem(jwtTokenStorageName, json.token)
-        authPopup.hide()
-        loginUser(json.user)
-    })
-    .catch(response => {
-        if(response.status == 401) {
-            response.json().then(json => {
+        .then(response => {
+            sessionStorage.setItem(jwtTokenStorageName, response.body.token)
+            authPopup.hide()
+            loginUser(response.body.user)
+        })
+        .catch(response => {
+            if(response.status == 401) {
                 authPopup.clearInput()
-                authPopup.mainErr.innerText = json.message
-            })
-        } else {
-            throw response
-        }
-    }).catch(response => {
-        console.error('Unrecognized response: ' + response)
-    })
+                authPopup.mainErr.innerText = response.body.message
+            } else {
+                throw response
+            }
+        }).catch(response => {
+            console.error('Unrecognized response: ' + response)
+        })
 }
 
 function basicLogin(username, password) {
-    return fetch('/api/auth/login', {
-        method: 'POST',
+    return request({ url: '/api/auth/login', method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
+        body: {
             username: username,
             password: password
-        })
-    }).then(response => {
-        if(isSuccessful(response)) {
-            return response.json()
-        } else {
-            throw response
         }
     })
-}
-
-function isSuccessful(response) {
-    return response != null && response != undefined && response.status >= 200 && response.status < 300
 }
 
 function getToken() {
     return sessionStorage.getItem(jwtTokenStorageName)
 }
 
-function authenticatedRequest(url, params) {
+function authenticatedRequest(params) {
 
     if(typeof params != 'object'){
         params = {}
@@ -138,31 +125,28 @@ function authenticatedRequest(url, params) {
 
     params.headers['Authorization'] = 'Bearer ' + getToken()
 
-    return fetch(url, params)
-    .then(response => {
-        if(response.status == 401) {
-            response.json().then(json => {
-                if(json.code == 1000 || json.code == 1001) { // token is expired or invalid
+    return request(params)
+        .catch(response => {
+            if(response.status == 401) {
+                if(response.body.code == 1000 || response.body.code == 1001) { // token is expired or invalid
                     authPopup.show()
                 } else {
-                    console.error('Unknown reason of unauthenticated request: ', json)
+                    console.error('Unknown reason of unauthenticated request: ', response.body)
                 }
-                return null;
-            })
-            return null
-        } else {
-            return response
-        }
-    })
+                return null
+            } else {
+                return response
+            }
+        })
 }
 
 function tryLogin() {
-    authenticatedRequest('/api/user', {})
-    .then(response => {
-        if(isSuccessful(response)) {
-            response.json().then(user => loginUser(user))
-        }
-    })
+    authenticatedRequest({url: '/api/user'})
+        .then(response => {
+            if(response != null && response != undefined){
+                loginUser(response.body)
+            }
+        })
 }
 
 function loginUser(user) {

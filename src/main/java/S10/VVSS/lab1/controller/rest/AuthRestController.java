@@ -9,11 +9,14 @@ import S10.VVSS.lab1.exception.AuthException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -37,7 +40,7 @@ public class AuthRestController {
             logger.info(String.format("No user with username '%s' found", request.getUsername()));
             return AuthException.wrongUsernameOrPassword();
         });
-        if( passwordEncoder.matches(request.getPassword(), user.getPassword()) ) {
+        if( request.getPassword() != null && passwordEncoder.matches(request.getPassword(), user.getPassword()) ) {
             String token = tokenService.createToken(user.getId());
             return new AuthResponseDto(user, token);
         } else {
@@ -47,7 +50,7 @@ public class AuthRestController {
     }
 
     @PostMapping("/signup")
-    public AuthResponseDto signup(@RequestBody AuthRequestDto request) {
+    public ResponseEntity<AuthResponseDto> signup(@RequestBody AuthRequestDto request) {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(request.getPassword());
@@ -56,6 +59,6 @@ public class AuthRestController {
         user = userService.save(user);
 
         String token = tokenService.createToken(user.getId());
-        return new AuthResponseDto(user, token);
+        return ResponseEntity.created(URI.create("/api/user")).body(new AuthResponseDto(user, token));
     }
 }

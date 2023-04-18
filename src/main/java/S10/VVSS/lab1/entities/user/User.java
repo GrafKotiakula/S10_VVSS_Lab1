@@ -39,7 +39,7 @@ public class User extends AbstractEntity implements UserDetails {
     }
 
     @Override
-    @JsonProperty
+    @JsonIgnore
     public String getPassword() {
         return password;
     }

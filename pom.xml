@@ -14,6 +14,10 @@
     <maven.compiler.target>11</maven.compiler.target>
     <jupiter.version>5.8.2</jupiter.version>
     <jjwt.version>0.9.1</jjwt.version>
+    <selenium.version>4.0.0</selenium.version>
+    <htmlunit.driver.version>4.8.3</htmlunit.driver.version>
+    <htmlunit.version>2.70.0</htmlunit.version>
+    <sac.version>1.3</sac.version>
   </properties>
 
   <parent>
@@ -72,7 +76,27 @@
       <artifactId>h2</artifactId>
       <scope>test</scope>
     </dependency>
-
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>${selenium.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>htmlunit-driver</artifactId>
+      <version>${htmlunit.driver.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sourceforge.htmlunit</groupId>
+      <artifactId>htmlunit</artifactId>
+      <version>${htmlunit.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.w3c.css</groupId>
+      <artifactId>sac</artifactId>
+      <version>${sac.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
