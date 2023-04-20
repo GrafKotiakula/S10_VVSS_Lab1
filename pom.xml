@@ -12,8 +12,10 @@
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
+
     <jupiter.version>5.8.2</jupiter.version>
     <jjwt.version>0.9.1</jjwt.version>
+
     <selenium.version>4.0.0</selenium.version>
     <htmlunit.driver.version>4.8.3</htmlunit.driver.version>
     <htmlunit.version>2.70.0</htmlunit.version>
